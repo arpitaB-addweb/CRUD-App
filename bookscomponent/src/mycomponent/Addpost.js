@@ -1,27 +1,49 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+
 
 const Addpost = () => {
     // let history = useHistory();
+    const validationSchema = Yup.object().shape({
+       
+        UserId: Yup.number()
+            .required('UserName is required')
+            .min(4),
+        Title: Yup.string()
+            .required('title is required'),
+        Body: Yup.string()
+            .required('Body is required')
+    });
+    const formOptions = { resolver: yupResolver(validationSchema) };
 
+    const { register, handleSubmit, reset , formState } = useForm(formOptions);
+    const { errors } = formState;
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(true);
     const [post, setPost] = useState({
-        userId: "",
+        userid: "",
         title: "",
         body: "",
     });
-    const { userId, title, body } = post;
+    const { userid, title, body } = post;
+    console.log(userid)
     const onInputChange = e => {
+        console.log(e.target.value)
         setPost({ ...post, [e.target.name]: e.target.value });
     };
 
-    const onSubmit = async e => {
-        e.preventDefault();
+    const onSubmit = async (e) => {
+        // e.preventDefault();
         await axios.post("http://localhost:3005/posts",post);
         alert("Data inserted successfully");
         // history.push("/");
+        console.log(post)
+       
+        // console.log(e)
     };
 
     useEffect(() => {
@@ -50,16 +72,18 @@ const Addpost = () => {
             <div className="container2">
                 <div className="main2">
                     <h1>Add-Post</h1>
-                    <form onSubmit={e => onSubmit(e)}>
+                    <form onSubmit={handleSubmit(e => onSubmit(e))}>
                         <div className="form-group2">
                             <input
                                 type="text"
-                                className="userid"
                                 placeholder="UserId"
                                 name="userid"
-                                value={userId}
+                                value={userid}
                                 onChange={onInputChange}
+                                {...register('UserId')} className={`${errors.UserId ? 'is-invalid' : ''}`} 
+                                
                             />
+                            <div className="invalid-feedback">{errors.UserId?.message}</div>
                         </div>
                         <div className="form-group2">
                             <input
@@ -69,7 +93,9 @@ const Addpost = () => {
                                 name="title"
                                 value={title}
                                 onChange={onInputChange}
+                                 {...register('Title')} className={`${errors.Title ? 'is-invalid' : ''}`} 
                             />
+                             <div className="invalid-feedback">{errors.Title?.message}</div>
                         </div>
                         <div className="form-group2">
                             <input
@@ -79,9 +105,12 @@ const Addpost = () => {
                                 name="body"
                                 value={body}
                                 onChange={onInputChange}
+                                {...register('Body')} className={`${errors.Body ? 'is-invalid' : ''}`}
                             />
+                             <div className="invalid-feedback">{errors.Body?.message}</div>
                         </div>
                         <button className="btn-btn">Submit</button>
+                        <button type="button" onClick={()=> reset()}>Reset</button>
                     </form>
                 </div>
             </div>
@@ -91,4 +120,5 @@ const Addpost = () => {
 };
 
 export default Addpost;
+
 
