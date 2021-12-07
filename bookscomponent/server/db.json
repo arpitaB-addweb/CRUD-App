@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "name": "Arpita Bahedia",
+      "username": "arpita.bahe_2000",
+      "email": "arpita.b.addweb@gmail.c",
+      "address": {
+        "street": "ram gali",
+        "suite": "keshavnagar",
+        "city": "ahemdabad",
+        "zipcode": "380027",
+        "geo": {
+          "lat": "12345",
+          "lag": "4356"
+        }
+      },
+      "phone": "9876543210",
+      "website": "wwww.demo.c",
+      "company": {
+        "cname": "addweb",
+        "catchPhrase": "react,vue,falana,dhikra",
+        "bs": "Software"
+      },
+      "id": 1
+    }
+  ],
+  "posts": [
+    {
+      "userid": "12",
+      "title": "Addweb Solution pvt. Ltd",
+      "body": "Ahemdabad",
+      "id": 1
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
