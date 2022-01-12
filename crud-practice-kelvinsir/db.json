@@ -1,0 +1,21 @@
+{
+  "users": [
+    {
+      "name": " sunny",
+      "username": "arpita.bahe_2000",
+      "email": "arpita.b.addweb@gmail.com",
+      "phone": "9876543210",
+      "id": 1
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
